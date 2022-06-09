@@ -24,7 +24,13 @@ import { Component, VERSION } from '@angular/core';
     </button>
 
 </mat-toolbar>`,
-  styles: [''],
+  styles: [
+    `
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+  `,
+  ],
 })
 export class MenuComponent {
   name: string = 'Angular ';
