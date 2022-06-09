@@ -4,10 +4,27 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
+import { RouterModule, Routes } from '@angular/router';
+import { MaterialModule } from './material.module';
+import { MenuComponent } from './menu.component';
+
+const routes: Routes = [
+  { path: '', component: HelloComponent },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
+  },
+];
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, HelloComponent ],
-  bootstrap:    [ AppComponent ]
+  imports: [
+    BrowserModule,
+    FormsModule,
+    MaterialModule,
+    RouterModule.forRoot(routes),
+  ],
+  declarations: [AppComponent, HelloComponent, MenuComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
