@@ -1,10 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Credentials } from './models';
 
+// Login
 @Component({
   selector: 'app-sign-in',
   template: `
-    <p>Sign In</p>
     <form #form="ngForm" (ngSubmit)="form.valid && signIn.emit(form.value)">
       <mat-form-field appearance="fill" floatLabel="always">
         <mat-label>Email</mat-label>
@@ -21,9 +27,12 @@ import { Credentials } from './models';
           matInput
           email
           required
+          #controllaEmail="ngModel"
         />
+        <mat-error *ngIf="controllaEmail.hasError('email')">
+          Per favore inserisci un email valida
+        </mat-error>
       </mat-form-field>
-
       <mat-form-field appearance="fill" floatLabel="always">
         <mat-label>Password</mat-label>
         <mat-icon
@@ -49,27 +58,28 @@ import { Credentials } from './models';
           <mat-icon *ngIf="!isPasswordVisible">visibility_off</mat-icon>
         </button>
       </mat-form-field>
-
       <button
         mat-raised-button
         color="primary"
         class="btn-submit"
         [disabled]="disabled"
-        >Sign in
+      >
+        Sign in
       </button>
     </form>
   `,
   styles: [
     `
-  mat-form-field {
-    display: block;
-  }
-  .btn-submit {
-    width: 100%;
-    margin: auto;
-  }
-`,
+      mat-form-field {
+        display: block;
+      }
+      .btn-submit {
+        width: 100%;
+        margin: auto;
+      }
+    `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent {
   isPasswordVisible = false;

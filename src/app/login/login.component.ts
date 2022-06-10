@@ -33,6 +33,8 @@ import { Credentials, Mode, Status } from './models';
 
       <app-sign-up
         *ngIf="(mode$ | async) === 'signup'"
+        (signUp)="test($event)"
+
         [disabled]="(status$ | async) === 'pending'"
       ></app-sign-up>
 
