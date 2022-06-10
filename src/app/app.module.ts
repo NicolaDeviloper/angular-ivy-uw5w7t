@@ -7,6 +7,7 @@ import { HelloComponent } from './hello.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { MenuComponent } from './menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: '', component: HelloComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
     FormsModule,
     MaterialModule,
     RouterModule.forRoot(routes),
+    BrowserAnimationsModule
   ],
   declarations: [AppComponent, HelloComponent, MenuComponent],
   bootstrap: [AppComponent],

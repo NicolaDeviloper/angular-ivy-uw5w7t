@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { AuthService } from '../auth.service';
 import { Credentials, Mode, Status } from './models';
 
 @Component({
@@ -25,6 +27,7 @@ import { Credentials, Mode, Status } from './models';
 
       <app-sign-in
         *ngIf="(mode$ | async) === 'signin'"
+        (signIn)="test($event)"
         [disabled]="(status$ | async) === 'pending'"
       ></app-sign-in>
 
@@ -60,7 +63,7 @@ import { Credentials, Mode, Status } from './models';
     `,
   ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   // States
   public status$ = new BehaviorSubject<Status>('initial');
   public mode$ = new BehaviorSubject<Mode>('signin');
@@ -69,7 +72,15 @@ export class LoginComponent implements OnInit {
   public signUp$ = new Subject<Credentials>();
   private destroy$ = new Subject<void>();
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnDestroy(): void {
+    //throw new Error('Method not implemented.');
+  }
 
   ngOnInit() {}
+
+  test(x) {
+    console.log(x);
+  }
 }
