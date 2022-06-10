@@ -39,7 +39,7 @@ import { Credentials, Mode, Status } from './models';
       ></app-sign-up>
 
      
-  <mat-card-content>
+      <mat-card-content>
         <app-status [status]="status$ | async"></app-status>
       </mat-card-content>
  
